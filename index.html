@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama & Alaa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almendra+Display&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quintessential&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sama.css">
+</head>
+<body>
+    <audio autoplay loop id="bg-audio">
+  <source src="bgmusic.mp3" type="audio/mpeg">
+</audio>
+
+    <div class="flash-overlay" id="flashOverlay"></div>
+    <div class="logo"><img src="logo1.png" alt=""></div>
+
+    <div class="head fade-item">Alaa & Sama</div>
+    
+    <div class="subhead fade-item">Are getting engaged!</div>
+    
+    
+    <div class="env-container fade-item">
+        <div class="interactive-wrapper" id="interactiveWrapper">
+            
+            <div class="envelope-box" id="envelopeBox">
+                <img src="ll.png" alt="envelope" class="envelope-img">
+                <div class="open-text">Click to Open....</div>
+            </div>
+            
+            
+            <div class="video-box" id="videoBox">
+                <video id="invitationVideo" playsinline muted>
+                    <source src="en1.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="details-section" id="detailsSection">
+                <div class="save">Save the Date</div>
+                <div class="date-row">
+                    <span class="date fade-item">8</span>
+                    <span class="date1 fade-item">June</span>
+                    <span class="date2 fade-item">2026</span>
+                </div>
+                <div class="bar"><img src="bar2.png" alt=""></div>
+                <div class="venue">Venue</div>
+                <div class="place"><img src="place3.png" alt=""></div>
+                <div class="placetext">Royal Plaza Maadi</div>
+                <div class="time">8 P.M - 12 P.M</div>
+                <a class="location" href="https://www.google.com/maps/place/Royal+Plaza+Corniche+Al-Maadi/@29.9718429,30.9592428,11z/data=!4m10!1m2!2m1!1sroyal+plaza+maadi!3m6!1s0x14584705b675461d:0x2561ca271438e469!8m2!3d29.9733315!4d31.2349357!15sChFyb3lhbCBwbGF6YSBtYWFkaZIBDXdlZGRpbmdfdmVudWXgAQA!16s%2Fg%2F11hf6r39_z?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">click for Location</a>
+
+                <div class="countdown-container fade-item">
+                    <div class="countdown-title">Days Left</div>
+                    <div class="countdown-row">
+                        <div class="countdown-box">
+                            <span id="days">22</span>
+                            <div class="label">Days</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="hours">11</span>
+                            <div class="label">Hours</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="minutes">00</span>
+                            <div class="label">Minutes</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="seconds">50</span>
+                            <div class="label">Seconds</div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const envelope = document.querySelector(".envelope-box");
+    const audio = document.getElementById("bg-audio");
+
+    if (envelope && audio) {
+        envelope.addEventListener("click", () => {
+            // Unlocks and plays audio on mobile browsers upon user interaction
+            audio.play().catch(error => {
+                console.log("Audio playback behavior blocked or handled:", error);
+            });
+        });
+    }
+});
+        const envelopeBox = document.getElementById('envelopeBox');
+        const videoBox = document.getElementById('videoBox');
+        const invitationVideo = document.getElementById('invitationVideo');
+        const flashOverlay = document.getElementById('flashOverlay');
+        const detailsSection = document.getElementById('detailsSection');
+        const headElement = document.querySelector('.head');
+        const subheadElement = document.querySelector('.subhead');
+
+        envelopeBox.addEventListener('click', function() {
+            // 1. Trigger the screen-wide flash transition
+            flashOverlay.classList.add('flash-active');
+
+            // 2. Mid-flash swap (250ms) - execute while view is obscured
+            setTimeout(() => {
+                envelopeBox.style.display = 'none'; // Completely hide static image
+                videoBox.style.display = 'block';   // Reveal video structural frame
+                
+                // Hide the heading and subheading immediately
+                if (headElement) headElement.style.display = 'none';
+                if (subheadElement) subheadElement.style.display = 'none';
+                
+                // Play video file seamlessly
+                invitationVideo.play().catch(error => {
+                    console.log("Video autoplay fluid block intercepted: ", error);
+                });
+
+                // Show the rest of your page information below
+                detailsSection.classList.add('visible');
+                document.body.style.overflowY = 'auto'; // Unlock site scrolling
+            }, 250);
+
+            // 3. Dissipate flash screen
+            setTimeout(() => {
+                flashOverlay.classList.remove('flash-active');
+            }, 700);
+        });
+
+        // Scroll reveal controller for page elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-item').forEach(el => observer.observe(el));
+
+        // --- Countdown Timer Logic ---
+        function updateCountdown() {
+            // Set targeted Wedding Date (June 8, 2026 at 8:00 PM)
+            const weddingDate = new Date('June 8, 2026 20:00:00').getTime();
+            const now = new Date().getTime();
+            const gap = weddingDate - now;
+
+            if (gap <= 0) {
+                document.querySelector('.countdown-container').innerHTML = "<div class='countdown-title'>Today is the Big Day!</div>";
+                return;
+            }
+
+            // Time math conversions
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            // Print numbers with leading zeroes
+            document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+        }
+
+        // Run counting loop every single second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

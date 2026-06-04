@@ -1,0 +1,355 @@
+/* ==========================================================================
+   1. Base Document Layout & Theme
+   ========================================================================== */
+body {
+    background-color: #300814; /* Deep Burgundy / Bordeaux */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Allows scrolling on mobile once opened */
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+}
+
+.lobster-regular {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.petit-formal-script-regular {
+    font-family: "Petit Formal Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.almendra-display-regular {
+    font-family: "Almendra Display", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.quintessential-regular {
+    font-family: "Quintessential", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#bg-audio {
+    display: none;
+}
+
+/* Typography & Headings */
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    transform: scale(0.7);
+}
+
+.logo img {
+    max-width: 240px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.head {
+    font-family: "Petit Formal Script", cursive;
+    font-size: clamp(50px, 8vw, 100px);
+    text-align: center;
+    color: #e5dee2;
+}
+
+.subhead {
+    font-family: "Quintessential", serif;
+    font-size: clamp(10px, 4vw, 50px);
+    text-align: center;
+    color: #e5dee2;
+    margin-top: 10px;
+    margin-bottom: clamp(20px, 3vh, 40px);
+}
+
+/* Scroll Animation Wrapper States */
+.fade-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   2. White Flash & Envelope Interaction FX
+   ========================================================================== */
+.flash-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.flash-active {
+    animation: flash-sequence 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes flash-sequence {
+    0% { opacity: 0; }
+    30% { opacity: 1; } 
+    100% { opacity: 0; }
+}
+
+.env-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+.interactive-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+/* Envelope Box Setup */
+.envelope-box {
+    position: relative;
+    cursor: pointer;
+    width: 480px;
+    max-width: 100%;
+    z-index: 30;
+    transition: transform 0.3s ease;
+}
+
+.envelope-box:hover {
+    transform: scale(1.02);
+}
+
+.envelope-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.open-text {
+    font-size: 22px;
+    font-family: "Quintessential", serif;
+    text-align: center;
+    color: #e5dee2;
+    letter-spacing: 1px;
+    margin-bottom: 1000px;
+    padding-bottom: 100px;
+    animation: textPulse 1.4s infinite alternate;
+}
+
+@keyframes textPulse {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+/* Video Box Setup */
+.video-box {
+    display: none; 
+    width: 480px;
+    max-width: 100%;
+    z-index: 10;
+    margin: 25px 0 10px;
+}
+
+.video-box video {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform: scale(1.4);
+    border-radius: 6px;
+}
+
+/* ==========================================================================
+   3. Wedding Details Section
+   ========================================================================== */
+.details-section {
+    display: none; 
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px; /* Prevents contents from touching mobile screen edges */
+    margin-top: 20px;
+    
+    /* Forces ALL items in the detail view to stay perfectly stacked down the center */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.details-section.visible {
+    display: flex; /* Flex layout forces everything to honor the centering properties */
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.save {
+    font-size: 28px;
+    font-family: "Quintessential", serif;
+    color: #e5dee2;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.date-row {
+    display: flex;
+    font-family: "Quintessential", serif;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 45px;
+    color: #e5dee2;
+    margin-top: 70px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.bar img, .place img {
+    max-width: 100%;
+    height: auto;
+    margin: 15px auto;
+    
+}
+
+.venue {
+    font-family: "Quintessential", serif;
+    font-size: 32px;
+    color: #e5dee2;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.place {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    transform: scale(1.2);
+}
+
+.placetext {
+    font-size: 24px;
+    font-family: "Quintessential", serif;
+    color: #e5dee2;
+    margin-top: 40px;
+}
+
+.time {
+    font-size: 22px;
+    font-family: "Quintessential", serif;
+    color: #e5dee2;
+    margin: 10px 0 30px 0;
+}
+
+.location {
+    display: inline-block;
+    font-size: 20px;
+    padding: 12px 45px;
+    color: #800020;
+    background: #e5dee2;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Quintessential", serif;
+    text-transform: cubic-case;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.location:hover {
+    transform: scale(1.08);
+    background: #ffffff;
+}
+
+/* ==========================================================================
+   4. Framed Countdown Mechanism (wedd.png)
+   ========================================================================== */
+.countdown-container {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+    background-image: url(frame2.png);
+    
+    /* Responsive sizing rules for mobile */
+    max-width: 380px; 
+    width: 100%;      /* Lets it shrink smoothly on narrow screens */
+    height: 420px;    
+    
+    /* Forces layout engine to find the exact global center of screens */
+    margin: 40px auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.countdown-title {
+    font-family: "Petit Formal Script", cursive;
+    font-size: 36px;
+    color: #800020;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.countdown-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; 
+    width: 100%;
+}
+
+.countdown-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+}
+
+.countdown-box span {
+    font-size: 18px; 
+    font-weight: bold;
+    color: #800020;
+    line-height: 1.1;
+    font-family: "Quintessential", serif;
+}
+
+.countdown-box .label {
+    font-size: 10px;
+    color: #800020;
+    text-align: center;
+    font-weight: 500;
+    font-family: "Quintessential", serif;
+    margin-top: 4px;
+}
